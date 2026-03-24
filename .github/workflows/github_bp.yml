@@ -1,0 +1,19 @@
+name: GitHub Branch Protection
+
+on:
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  call_reusable_github_bp:
+    name: GitHub Branch Protection Scan
+    uses: complytime/org-infra/.github/workflows/reusable_compliance.yml@main
+    with:
+      complytime_config_path: complytime.yaml
+    secrets:
+      source_token: ${{ secrets.GITHUB_TOKEN }}
